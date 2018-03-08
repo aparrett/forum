@@ -22,7 +22,10 @@ class CreateThreadsTest extends TestCase
     /** @test */
     function guests_cannot_see_the_create_thread_page()
     {
-        $this->get('/threads/create')
+        // withExceptionHandling allows Laravel to automatically handle render exception
+        // so we can test the redirect.
+        $this->withExceptionHandling()
+            ->get('/threads/create')
             ->assertRedirect('/login');
     }
 
